@@ -1,0 +1,40 @@
+# custom app config
+# overrides DCAPE/apps/drone/dcape-app/docker-compose.yml
+
+version: '2'
+
+services:
+  app:
+    labels:
+      - "traefik.http.services.app-${APP_TAG}.loadbalancer.server.port=8000"
+    volumes:
+      - ${DCAPE_ROOT}/woodpecker_empty:/var/lib/woodpecker/
+    environment:
+      - WOODPECKER_OPEN=false
+      - WOODPECKER_HOST=${HTTP_PROTO}://${APP_SITE}
+      - WOODPECKER_AGENT_SECRET=${AGENT_SECRET}
+      - WOODPECKER_ADMIN=${ADMIN_USERS}
+      - WOODPECKER_GITHUB=${VCS_GITHUB_USED}
+      - WOODPECKER_GITHUB_CLIENT=${VCS_CLIENT}
+      - WOODPECKER_GITHUB_SECRET=${VCS_SECRET}
+      - WOODPECKER_GITEA=${VCS_GITEA_USED}
+      - WOODPECKER_GITEA_URL=${VCS_URL}
+      - WOODPECKER_GITEA_CLIENT=${VCS_CLIENT}
+      - WOODPECKER_GITEA_SECRET=${VCS_SECRET}
+      # TODO:      - DRONE_GIT_ALWAYS_AUTH=true
+
+  agent:
+    image: woodpeckerci/woodpecker-agent:latest
+    command: agent
+    restart: always
+    depends_on:
+      - app
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WOODPECKER_SERVER=app:9000 # GRPC server
+      - WOODPECKER_AGENT_SECRET=${AGENT_SECRET}
+      - WOODPECKER_DATABASE_DRIVER=postgres
+      - WOODPECKER_DATABASE_DATASOURCE=postgres://${PGUSER}:${PGPASSWORD}@db/${PGDATABASE}?sslmode=disable
+    networks:
+      - lan
