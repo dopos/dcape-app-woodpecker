@@ -10,6 +10,10 @@
 
 [Woodpecker CI](https://woodpecker-ci.org/) application package for [dcape](https://github.com/dopos/dcape).
 
+## Why Woodpecker CI?
+
+See [here](https://devforth.io/blog/step-by-step-guide-to-modern-secure-ci-setup/)
+
 ## Docker image used
 
 * [woodpecker-server](https://hub.docker.com/r/woodpeckerci/woodpecker-server)
