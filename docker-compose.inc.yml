@@ -1,4 +1,4 @@
-services:
+  # ------------------------------------------------------------------------------
   cicd:
     extends:
       file: ${DCAPE_ROOT}/docker-compose.dcape.yml
