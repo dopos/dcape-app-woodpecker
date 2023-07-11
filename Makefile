@@ -1,6 +1,9 @@
 # woodpecker init Makefile
 # This file included by ../../Makefile
 
+SHELL                   = /bin/bash
+CFG                    ?= .env
+
 # Docker image version tested for actual dcape release
 CICD_VER0              ?= v0.15.9-alpine
 
@@ -49,8 +52,12 @@ CICD_IMAGE             ?= woodpeckerci/woodpecker-server
 #- Docker image version
 CICD_VER               ?= $(CICD_VER0)
 
-NAME=CICD
-DB_INIT_SQL=
+#- dcape root directory
+DCAPE_ROOT             ?= $(DCAPE_ROOT)
+
+# Vars for db-create
+NAME                    = CICD
+DB_INIT_SQL             =
 # ------------------------------------------------------------------------------
 
 -include $(CFG)
@@ -72,12 +79,13 @@ init:
 	@echo "  Admin: $(CICD_ADMIN)"
 
 ifeq ($(TOKEN),)
-  ifneq ($(findstring $(MAKECMDGOALS),setup),)
+  ifneq ($(findstring $(MAKECMDGOALS),setup oauth2-create),)
     -include $(DCAPE_VAR)/oauth2-token
   endif
 endif
 
 # create DB
-setup:
-	$(MAKE) -s db-create
+setup: db-create oauth2-create
+
+oauth2-create:
 	$(MAKE) -s oauth2-app-create HOST=$(CICD_HOST) URL=/authorize PREFIX=CICD_GITEA
