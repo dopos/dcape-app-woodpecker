@@ -11,7 +11,7 @@ CICD_VER0              ?= v0.15.9-alpine
 CICD_HOST              ?= cicd.$(DCAPE_DOMAIN)
 
 #- CICD admin user
-CICD_ADMIN             ?= $(GITEA_ADMIN_NAME)
+CICD_ADMIN             ?= $(DCAPE_ADMIN_USER)
 
 #- VCS (Version control systems) (gitea/github) config
 
@@ -49,6 +49,8 @@ CICD_IMAGE             ?= woodpeckerci/woodpecker-server
 #- Docker image version
 CICD_VER               ?= $(CICD_VER0)
 
+NAME=CICD
+DB_INIT_SQL=
 # ------------------------------------------------------------------------------
 
 -include $(CFG)
@@ -69,7 +71,13 @@ init:
 	@echo "  URL: $(DCAPE_SCHEME)://$(CICD_HOST)"
 	@echo "  Admin: $(CICD_ADMIN)"
 
+ifeq ($(TOKEN),)
+  ifneq ($(findstring $(MAKECMDGOALS),setup),)
+    -include $(DCAPE_VAR)/oauth2-token
+  endif
+endif
+
 # create DB
-cicd-apply:
-	@cmd=create ; \
-	$(MAKE) -s db-create NAME=CICD
+setup:
+	$(MAKE) -s db-create
+	$(MAKE) -s oauth2-app-create HOST=$(CICD_HOST) URL=/authorize PREFIX=CICD_GITEA
