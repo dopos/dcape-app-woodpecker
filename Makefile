@@ -5,7 +5,7 @@ SHELL                   = /bin/bash
 CFG                    ?= .env
 
 # Docker image version tested for actual dcape release
-CICD_VER0              ?= v0.15.9-alpine
+CICD_VER0              ?= v0.15.11-alpine
 
 #- ******************************************************************************
 #- CICD: general config

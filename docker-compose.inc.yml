@@ -10,6 +10,7 @@
     depends_on:
       - cicd-agent
     environment:
+      - GIN_MODE=release
       - WOODPECKER_OPEN=false
       - WOODPECKER_HOST=${DCAPE_SCHEME}://${CICD_HOST}
       - WOODPECKER_AGENT_SECRET=${CICD_AGENT_SECRET}
