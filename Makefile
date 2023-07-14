@@ -64,7 +64,6 @@ DB_INIT_SQL             =
 export
 
 ifdef DCAPE_STACK
-include $(DCAPE_ROOT)/$(CFG)
 include $(DCAPE_ROOT)/Makefile.dcape
 else
 include $(DCAPE_ROOT)/Makefile.app
@@ -79,13 +78,13 @@ init:
 	@echo "  Admin: $(CICD_ADMIN)"
 
 ifeq ($(TOKEN),)
-  ifneq ($(findstring $(MAKECMDGOALS),setup oauth2-create),)
-    -include $(DCAPE_VAR)/oauth2-token
+  ifneq ($(findstring $(MAKECMDGOALS),.setup-before-up oauth2-create),)
+    include $(DCAPE_VAR)/oauth2-token
   endif
 endif
 
 # create DB
-setup: db-create oauth2-create
+.setup-before-up: db-create oauth2-create
 
 oauth2-create:
 	$(MAKE) -s oauth2-app-create HOST=$(CICD_HOST) URL=/authorize PREFIX=CICD_GITEA
