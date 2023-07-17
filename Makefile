@@ -79,7 +79,7 @@ init:
 
 ifeq ($(TOKEN),)
   ifneq ($(findstring $(MAKECMDGOALS),.setup-before-up oauth2-create),)
-    include $(DCAPE_VAR)/oauth2-token
+    -include $(DCAPE_VAR)/oauth2-token
   endif
 endif
 
