@@ -77,7 +77,7 @@ init:
 	@echo "  URL: $(DCAPE_SCHEME)://$(CICD_HOST)"
 	@echo "  Admin: $(CICD_ADMIN)"
 
-ifeq ($(TOKEN),)
+ifeq ($(AUTH_TOKEN),)
   ifneq ($(findstring $(MAKECMDGOALS),.setup-before-up oauth2-create),)
     -include $(DCAPE_VAR)/oauth2-token
   endif
