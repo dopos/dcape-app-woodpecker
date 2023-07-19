@@ -1,5 +1,6 @@
-# woodpecker init Makefile
-# This file included by ../../Makefile
+## woodpecker Makefile.
+## Used with dcape at ../../
+#:
 
 SHELL                   = /bin/bash
 CFG                    ?= .env
@@ -58,6 +59,7 @@ DCAPE_ROOT             ?= $(DCAPE_ROOT)
 # Vars for db-create
 NAME                    = CICD
 DB_INIT_SQL             =
+
 # ------------------------------------------------------------------------------
 
 -include $(CFG)
@@ -69,7 +71,9 @@ else
 include $(DCAPE_ROOT)/Makefile.app
 endif
 
-# add config to $(CFG)
+# ------------------------------------------------------------------------------
+
+# check app version
 init:
 	@if [[ "$$CICD_VER0" != "$$CICD_VER" ]] ; then \
 	  echo "Warning: CICD_VER in dcape ($$CICD_VER0) differs from yours ($$CICD_VER)" ; \
@@ -83,8 +87,9 @@ ifeq ($(AUTH_TOKEN),)
   endif
 endif
 
-# create DB
+# setup app
 .setup-before-up: db-create oauth2-create
 
+# create OAuth application credentials
 oauth2-create:
 	$(MAKE) -s oauth2-app-create HOST=$(CICD_HOST) URL=/authorize PREFIX=CICD_GITEA
