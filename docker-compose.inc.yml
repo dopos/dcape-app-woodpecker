@@ -28,7 +28,7 @@
 #      - WOODPECKER_ESCALATE=docker,plugins/docker,plugins/gcr,plugins/ecr,woodpeckerci/plugin-docker,woodpeckerci/plugin-docker-buildx
       - WOODPECKER_LOG_LEVEL=debug
       - WOODPECKER_NETWORK=${DCAPE_NET}
-      #- WOODPECKER_AUTHENTICATE_PUBLIC_REPOS=true
+      - WOODPECKER_AUTHENTICATE_PUBLIC_REPOS=true
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs:ro
 
