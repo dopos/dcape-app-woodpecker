@@ -22,7 +22,7 @@ CICD_ADMIN             ?= $(DCAPE_ADMIN_USER)
 #- Use GitHub
 CICD_GITHUB_USED       ?= false
 #- Github URL for auth and repos
-CICD_GITHUB_URL        ?= http://git.dev.lan
+CICD_GITHUB_URL        ?= http://git.dev.test
 #- Github client ID
 CICD_GITHUB_CLIENT_ID  ?= SET_GITHUB_CLIENT_ID_HERE
 #- Github client secret
