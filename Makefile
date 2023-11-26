@@ -33,8 +33,10 @@ CICD_GITEA_USED        ?= true
 #- Gitea URL for auth and repos
 CICD_GITEA_URL         ?= $(AUTH_URL)
 #- Gitea client ID
+CICD_GITEA_CLIENT_ID   ?= $(DRONE_CLIENT_ID)
 CICD_GITEA_CLIENT_ID   ?= SET_GITEA_CLIENT_ID_HERE
 #- Gitea client secret
+CICD_GITEA_CLIENT_KEY  ?= $(DRONE_CLIENT_KEY)
 CICD_GITEA_CLIENT_KEY  ?= SET_GITEA_CLIENT_SECRET_HERE
 
 #- ------------------------------------------------------------------------------
