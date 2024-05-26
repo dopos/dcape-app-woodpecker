@@ -1,5 +1,7 @@
 # dcape-app-woodpecker
 
+> Приложение ядра [dcape](https://github.com/dopos/dcape) для задач CI/CD.
+
 [![GitHub Release][1]][2] [![GitHub code size in bytes][3]]() [![GitHub license][4]][5]
 
 [1]: https://img.shields.io/github/release/dopos/dcape-app-woodpecker.svg
@@ -8,47 +10,27 @@
 [4]: https://img.shields.io/github/license/dopos/dcape-app-woodpecker.svg
 [5]: LICENSE
 
-[Woodpecker CI](https://woodpecker-ci.org/) application package for [dcape](https://github.com/dopos/dcape).
+ Роль в dcape | Сервис | Docker images
+ --- | --- | ---
+ cicd | [Woodpecker CI](https://woodpecker-ci.org/) | [woodpecker-server](https://hub.docker.com/r/woodpeckerci/woodpecker-server),
+ [woodpecker-agent](https://hub.docker.com/r/woodpeckerci/woodpecker-agent)
 
-## Why Woodpecker CI?
+## Назначение
 
-See [here](https://devforth.io/blog/step-by-step-guide-to-modern-secure-ci-setup/)
+Деплой приложений при получении webhook от VCS.
 
-## Docker image used
+## Причины выбора Woodpecker CI
 
-* [woodpecker-server](https://hub.docker.com/r/woodpeckerci/woodpecker-server)
-* [woodpecker-agent](https://hub.docker.com/r/woodpeckerci/woodpecker-agent)
+См. [Step-by-step guide to modern, secure and Open-source CI setup](https://devforth.io/blog/step-by-step-guide-to-modern-secure-ci-setup/), 2022.
 
-## Requirements
-
-* linux 64bit (git, make, sed)
-* [docker](http://docker.io)
-* [dcape](https://github.com/dopos/dcape) v2
-* Git service ([github](https://github.com), [gitea](https://gitea.io) or [gogs](https://gogs.io))
+---
 
 ## Install
 
-### By mouse (deploy with drone)
-
-* Gitea: Fork or mirror this repo in your Git service
-* Drone: Activate repo
-* Gitea: "Test delivery", config sample will be saved to enfist
-* Enfist: Edit config and remove .sample from name
-* Gitea: "Test delivery" again (or Drone: "Restart") - app will be installed and started on webhook host
-
-### By hands
-
-```bash
-git clone --single-branch --depth 1 https://github.com/dopos/dcape-app-woodpecker.git
-cd dcape-app-woodpecker
-make config
-... <edit .env.sample>
-mv .env.sample .env
-make up
-```
+Приложение разворачивается в составе [dcape](https://github.com/dopos/dcape).
 
 ## License
 
 The MIT License (MIT), see [LICENSE](LICENSE).
 
-Copyright (c) 2023 Aleksei Kovrizhkin <lekovr+dopos@gmail.com>
+Copyright (c) 2023-2024 Aleksei Kovrizhkin <lekovr+dopos@gmail.com>
