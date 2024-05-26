@@ -12,8 +12,7 @@
 
  Роль в dcape | Сервис | Docker images
  --- | --- | ---
- cicd | [Woodpecker CI](https://woodpecker-ci.org/) | [woodpecker-server](https://hub.docker.com/r/woodpeckerci/woodpecker-server),
- [woodpecker-agent](https://hub.docker.com/r/woodpeckerci/woodpecker-agent)
+ cicd | [Woodpecker CI](https://woodpecker-ci.org/) | [server](https://hub.docker.com/r/woodpeckerci/woodpecker-server), [agent](https://hub.docker.com/r/woodpeckerci/woodpecker-agent)
 
 ## Назначение
 
