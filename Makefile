@@ -2,7 +2,7 @@
 ## Used with dcape at ../../
 #:
 
-# This file intended to use within dcape
+# This file is intended for use in dcape
 # Standalone use example:
 #   make init DCAPE_STACK=1
 
