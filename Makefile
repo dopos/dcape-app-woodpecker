@@ -2,11 +2,16 @@
 ## Used with dcape at ../../
 #:
 
+# This file intended to use within dcape
+# Standalone use example:
+#   make init DCAPE_STACK=1
+
 SHELL                   = /bin/bash
 CFG                    ?= .env
 
+CICD_TAG               ?= woodpecker
 # Docker image version tested for actual dcape release
-CICD_VER0              ?= v2.0.0-alpine
+CICD_VER0              ?= $(shell dig $(DCAPE_VERSION_OPTS) $(CICD_TAG).$(DCAPE_VERSION_DOMAIN) | tr -d \" | cut -f 2 -d " ")
 
 #- ******************************************************************************
 #- CICD: general config
