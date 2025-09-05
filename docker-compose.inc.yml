@@ -31,6 +31,8 @@
       - WOODPECKER_AUTHENTICATE_PUBLIC_REPOS=true
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
 
   cicd-agent:
     extends:
@@ -42,6 +44,8 @@
 #      - /etc/ssl/certs:/etc/ssl/certs:ro
       - /etc/docker/certs.d:/etc/docker/certs.d:ro
       - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     environment:
       - WOODPECKER_SERVER=cicd:9000 # GRPC server
       - WOODPECKER_AGENT_SECRET=${CICD_AGENT_SECRET}
